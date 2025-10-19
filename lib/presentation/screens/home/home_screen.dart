@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:widgets_app/config/menu/menu_items.dart';
+import 'package:widgets_app/presentation/screens/buttons/buttons_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,17 +20,17 @@ class _HomeView extends StatelessWidget {
     return ListView.builder(
       itemCount: appMenuItems.length,
       itemBuilder: (context, index) {
-        final MenuItem item = appMenuItems[index];
-        return _CustomListTitle(item: item);
+        final MenuItem menuItem = appMenuItems[index];
+        return _CustomListTitle(menuItem: menuItem);
       },
     );
   }
 }
 
 class _CustomListTitle extends StatelessWidget {
-  const _CustomListTitle({required this.item});
+  const _CustomListTitle({required this.menuItem});
 
-  final MenuItem item;
+  final MenuItem menuItem;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +38,12 @@ class _CustomListTitle extends StatelessWidget {
 
     return ListTile(
       trailing: Icon(Icons.arrow_forward_ios_outlined, color: colors.primary),
-      leading: Icon(item.icon, color: colors.primary),
-      title: Text(item.title),
-      subtitle: Text(item.subtitle),
+      leading: Icon(menuItem.icon, color: colors.primary),
+      title: Text(menuItem.title),
+      subtitle: Text(menuItem.subtitle),
+      onTap: () {
+        Navigator.pushNamed(context, menuItem.link);
+      },
     );
   }
 }
